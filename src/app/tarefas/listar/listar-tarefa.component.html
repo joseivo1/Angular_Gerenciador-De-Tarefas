@@ -18,6 +18,7 @@
   <!-- Tabelas Com a Geração de Tarefas    Inicio-->
   <tr  *ngFor='let tarefa of tarefas'>
     <td
+     [tarefaConcluida]="tarefa.concluida"
     [class.text-success]="!tarefa.concluida">  
       {{ tarefa.nome }}
     </td>
@@ -27,6 +28,7 @@
         type="checkbox"
         value="tarefa.id"
         [checked]="tarefa.concluida"
+        (click)="alterarStatus(tarefa)"
         >
     </td>
     <!-- Checkbox  Fim-->
@@ -43,7 +45,9 @@
           aria-hidden="true"></span> Editar
       </a>
       
-      <a href="#" title="Remover" alt="Remover" 
+      <a 
+      (click)="remover($event, tarefa)"
+      href="#" title="Remover" alt="Remover" 
         
         class="btn btn-xs btn-danger">
         <span class="glyphicon glyphicon-remove" 
